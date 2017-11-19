@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1488144011 source:/home/master/trabalho/console/copiar arquivos/copiar/main.c
+	<stdio.h>
+	<stdlib.h>
+

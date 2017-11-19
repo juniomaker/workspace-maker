@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1488412524 source:/home/master/trabalho/console/terminal/terminal/terminal/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1488429698 source:/home/master/trabalho/console/terminal/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<fcntl.h>
+	<errno.h>
+	<termios.h>
+

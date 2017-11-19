@@ -1,0 +1,204 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
+
+int verif=0, numero_m, numero_h, ia=0, ib=1023, cont_m=0, cont_h=0,resp_h, palp_m;
+char nome[32];
+
+main()
+{
+    apresent();
+    nome_hum();
+    numero_maq();
+
+    while(verif==0){
+        joga_hum();
+        joga_maq();
+        rotina_verif();
+        rotina_verif1();
+        rotina_verif2();
+        rotina_verif3();
+    }
+    rotina_venceu();
+    getch();
+}
+apresent()
+{
+    puts("|**********************************************************|");
+    puts("|*               JOGO - ACERTE O NUMERO -                 *|");
+    puts("|********************( APRESENTACAO )**********************|");
+    puts("|* - JOGO ENTRE O MICRO E VOCE. O MICRO IRA ESCOLHER UM   *|");
+    puts("|*   NUMERO E VOCE OUTRO NUM INTERVALO ENTRE 1 E 1023.    *|");
+    puts("|* - CADA UM IRA TENTAR DESCOBIR O NUMERO DO OPONENTE,    *|");
+    puts("|*   ATE QUE UM DOS JOGADORES ADIVINHE O NUMERO DO OUTRO. *|");
+    puts("|* - O MICRO IRA INFORMAR SE O SEU PALPITE FOI CORRETO,   *|");
+    puts("|*   BAIXO OU ALTO.                                       *|");
+    puts("|* - VOCE DEVE FAZER O MESMO, INFORMANDO:                 *|");
+    puts("|*   (1) PARA UM CHUTE BAIXO;                             *|");
+    puts("|*   (2) PARA UM CHUTE ALTO;                              *|");
+    puts("|*   (3) PARA CERTO!                                      *|");
+    puts("|**********************************************************|");
+    puts("\n\n\n");
+
+}
+nome_hum()
+{
+    printf("   INFORME O SEU NOME: ");
+    gets(nome);
+    puts("\n");
+}
+numero_maq()
+{
+    srand(time(NULL));
+    numero_m = rand()% 1023;
+}
+
+joga_hum()
+{
+    printf("  * %s, tente acertar o numero que eu escolhi: ",nome);
+    scanf("%d",&numero_h);
+    if(cont_h == 0)
+    {
+        puts("\n");
+        puts("************************************************************");
+        puts("**** O RESULTADO SERA DIVULGADO APOS A JOGADA DO MICRO *****");
+        puts("************************************************************");
+    }
+    cont_h = cont_h + 1;
+    puts("\n");
+}
+
+joga_maq()
+{
+    palp_m = (ia+ib+1)/2;
+    printf("  * %s, acho que voce pensou no numero %d",nome,palp_m);
+    puts("\n");
+    printf("   digite (1) baixo, (2) alto ou (3) certo : ");
+    scanf("%d",&resp_h);
+    cont_m = cont_m + 1;
+    puts("************************************************************");
+    puts("\n");
+}
+
+msg()
+{
+   if(cont_h == 4)
+   {
+        puts("\n");
+        puts("*************************************************************");
+        puts("****** NAO E TAO FACIL QUANTO VOCE IMAGINAVA NAO E?!!! ******");
+        puts("*************************************************************");
+        puts("\n");
+   }
+    if(cont_h == 6)
+   {
+
+        puts("\n");
+        puts("*************************************************************");
+        printf("** OQUE HOUVE %s, JA ESTOU CHEGANDO PERTO, ACHEI QUE VOCE ***\n",nome);
+        puts("** SERIA UM BOM DESAFIO, MAS PELO QUE VEJO...            ****");
+        puts("*************************************************************");
+        puts("\n");
+        puts("                 --------------------------");
+        puts("                 -----00000------00000-----");
+        puts("                 ---00----------------00---");
+        puts("                 -----0000--------0000-----");
+        puts("                 ----0----0------0----0----");
+        puts("                 --------------------------");
+        puts("                 --------------------------");
+        puts("                 -------000000000000-------");
+        puts("                 -----00------------00-----");
+        puts("                 ----0----------------0----");
+        puts("                 --------------------------");
+        puts("                 --------------------------");
+        puts("                 --------------------------");
+        puts("\n");
+   }
+
+
+}
+
+rotina_verif()
+{
+    if(numero_h == numero_m)
+        verif = verif + 1;
+    else
+        if(resp_h == 3)
+        verif = verif + 1;
+}
+
+rotina_verif1()
+{
+    if(numero_h > numero_m)
+    {
+        puts(" ");
+        printf("           *** seu chute foi alto! ***");
+        puts("\n");
+    }
+    else
+        if (numero_h < numero_m)
+    {
+        puts(" ");
+        printf("           *** seu chute foi baixo! ***");
+        puts("\n");
+    }
+}
+
+rotina_verif2()
+{
+    if(resp_h == 1)
+        ia = palp_m;
+    else
+        if(resp_h == 2)
+        ib = palp_m;
+}
+
+rotina_verif3()
+{
+    if(cont_h >= 4)
+    if(verif != 1)
+    msg();
+
+}
+
+rotina_venceu()
+{
+    if(numero_h == numero_m)
+        if(resp_h == 3)
+        printf("\nOcorreu Empate! \n\n * FIM DO JOGO! *\n");
+        else
+        {
+             puts(" ");
+             printf("            * !!!!! %s PARABENS !!!!! *\n\n            voce acertou em %d tentativas!",nome,cont_h);
+             puts(" \n ");
+             puts("          ********** FIM DO JOGO! **********");
+             puts(" ");
+        }
+
+    else
+        if(resp_h == 3)
+    {
+        puts(" ");
+        printf("************* %s o micro acertou em %d tentativas!************",nome,cont_m);
+        puts("\n\n");
+        puts("            !!!!!!! FIM DO JOGO VOCE PERDEU!!!!!!!! ");
+        puts("\n");
+        puts("                 --------------------------");
+        puts("                 ----000000------000000----");
+        puts("                 --------------------------");
+        puts("                 -----0000--------0000-----");
+        puts("                 ----0----0------0----0----");
+        puts("                 --------------------------");
+        puts("                 --------------------------");
+        puts("                 ----000------------000----");
+        puts("                 --------00000000000-------");
+        puts("                 ----------0--|--0---------");
+        puts("                 ----------0--|--0---------");
+        puts("                 ------------000-----------");
+        puts("                 --------------------------");
+        puts("\n");
+        puts(" ");
+    }
+}
+
